@@ -1,18 +1,25 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import axios from 'axios';
+import { BASE_URL } from '../utils/constant';
 
 function Login({ setIsAuthenticated }) {
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-  });
+  const [formData, setFormData] = useState({ email: '', password: '' });
+  const [error, setError] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsAuthenticated(true);
-    navigate('/');
+    setError(''); // Clear previous errors
+    try {
+      const response = await axios.post(`${BASE_URL}/api/v1/login`, formData, { withCredentials: true });
+      console.log("Login Success:", response.data);
+      setIsAuthenticated(true);
+      navigate('/');
+    } catch (err) {
+      setError(err.response?.data?.message || 'Login failed. Please try again.');
+    }
   };
 
   return (
@@ -25,12 +32,11 @@ function Login({ setIsAuthenticated }) {
       >
         <div className="text-center mb-8">
           <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Welcome Back</h2>
-          <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-            Please sign in to your account
-          </p>
+          <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">Please sign in to your account</p>
         </div>
 
         <div className="card">
+          {error && <p className="text-red-500 text-sm text-center">{error}</p>}
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
               <label htmlFor="email" className="block text-sm font-medium mb-2">Email</label>
@@ -89,4 +95,4 @@ function Login({ setIsAuthenticated }) {
   );
 }
 
-export default Login
+export default Login;
