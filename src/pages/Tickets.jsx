@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment } from 'react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
+import { BASE_URL } from '../utils/constant';
 
 function Tickets() {
   const location = useLocation();
@@ -27,7 +28,7 @@ function Tickets() {
       setLoading(true);
       setError('');
       try {
-        const res = await fetch('http://localhost:4000/api/v1/tickets/all', {
+        const res = await fetch(`${BASE_URL}/api/v1/tickets/all`, {
           headers: {
             'Authorization': `Bearer ${localStorage.getItem('token')}`,
           },

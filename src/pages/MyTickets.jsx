@@ -3,6 +3,7 @@ import { TrashIcon, PencilIcon } from '@heroicons/react/24/outline';
 import { useState, useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { BASE_URL } from '../utils/constant';
 
 function MyTickets() {
   const [tickets, setTickets] = useState([]);
@@ -16,7 +17,7 @@ function MyTickets() {
       setError('');
       try {
         const token = localStorage.getItem('token');
-        const res = await fetch('http://localhost:4000/api/v1/user/tickets', {
+        const res = await fetch(`${BASE_URL}/api/v1/user/tickets`, {
           headers: {
             'Authorization': `Bearer ${token}`,
           },
@@ -43,7 +44,7 @@ function MyTickets() {
   const handleDelete = async (ticketId) => {
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch(`http://localhost:4000/api/v1/remove/tickets/${ticketId}`, {
+      const res = await fetch(`${BASE_URL}/api/v1/remove/tickets/${ticketId}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -64,7 +65,7 @@ function MyTickets() {
   const handleSave = async () => {
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch(`http://localhost:4000/api/v1/update/tickets/${editingTicket._id}`, {
+      const res = await fetch(`${BASE_URL}/api/v1/update/tickets/${editingTicket._id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

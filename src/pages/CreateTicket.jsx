@@ -35,7 +35,7 @@ function CreateTicket() {
       navigate('/login');
     } else {
       // Autofill user info
-      fetch(`${BASE_URL.replace(/\s+$/, '')}/api/v1/profile/get`, {
+      fetch(`${BASE_URL}/api/v1/profile/get`, {
         headers: {
           'Authorization': `Bearer ${token}`,
         },
@@ -66,7 +66,7 @@ function CreateTicket() {
     setLoading(true);
     setError('');
     try {
-      const res = await fetch('http://localhost:4000/api/v1/tickets', {
+      const res = await fetch(`${BASE_URL}/api/v1/tickets`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

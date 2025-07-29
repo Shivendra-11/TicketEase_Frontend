@@ -27,7 +27,7 @@ function Profile() {
       setError('');
       try {
         const token = localStorage.getItem('token');
-        const res = await fetch(`${BASE_URL.replace(/\s+$/, '')}/api/v1/profile/get`, {
+        const res = await fetch(`${BASE_URL}/api/v1/profile/get`, {
           headers: {
             'Authorization': `Bearer ${token}`,
           },
@@ -72,7 +72,7 @@ function Profile() {
     setSuccessMsg('');
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch(`${BASE_URL.replace(/\s+$/, '')}/api/v1/profile/edit`, {
+      const res = await fetch(`${BASE_URL}/api/v1/profile/edit`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
