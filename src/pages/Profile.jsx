@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { scaleIn, fadeInUp, staggerContainer } from '../utils/motion';
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { BASE_URL } from '../utils/constant';
@@ -99,14 +100,14 @@ function Profile() {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
+      variants={scaleIn}
+      initial="hidden"
+      animate="show"
       className="max-w-6xl mx-auto px-4 py-8"
     >
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Profile Info Card */}
-        <div className="card">
+        <motion.div variants={fadeInUp} className="card">
           <div className="flex flex-col items-center">
             <img
               src={userData.profileImage && userData.profileImage.trim() !== '' ? userData.profileImage : 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'}
@@ -191,11 +192,11 @@ function Profile() {
               </div>
             </div>
           )}
-        </div>
+        </motion.div>
 
         {/* Quick Actions */}
         <div className="md:col-span-2 space-y-6">
-          <div className="card">
+          <motion.div variants={staggerContainer} initial="hidden" animate="show" className="card">
             <h3 className="text-xl font-semibold mb-4">Quick Actions</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Link to="/create-ticket" className="card bg-primary-50 dark:bg-gray-700 hover:bg-primary-100 dark:hover:bg-gray-600 transition-colors">
@@ -226,9 +227,9 @@ function Profile() {
                 </div>
               </Link>
             </div>
-          </div>
+          </motion.div>
 
-          <div className="card">
+          <motion.div variants={fadeInUp} className="card">
             <h3 className="text-xl font-semibold mb-4">Activity Overview</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="p-4 bg-green-50 dark:bg-gray-700 rounded-lg">
@@ -244,7 +245,7 @@ function Profile() {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </motion.div>

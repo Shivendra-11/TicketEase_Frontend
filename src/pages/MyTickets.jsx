@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { scaleIn, listContainer, listItem, fadeInUp } from '../utils/motion';
 import { TrashIcon, PencilIcon } from '@heroicons/react/24/outline';
 import { useState, useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
@@ -88,9 +89,9 @@ function MyTickets() {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
+      variants={scaleIn}
+      initial="hidden"
+      animate="show"
       className="max-w-4xl mx-auto px-4 py-8"
     >
       <ToastContainer />
@@ -109,7 +110,7 @@ function MyTickets() {
       ) : error ? (
         <div className="text-red-600 mb-4">{error}</div>
       ) : editingTicket ? (
-        <div className="card p-4 mb-6">
+        <motion.div variants={fadeInUp} initial="hidden" animate="show" className="card p-4 mb-6">
           <h3 className="text-lg font-semibold mb-4">Edit Ticket</h3>
           <input
             type="text"
@@ -142,17 +143,16 @@ function MyTickets() {
             className="input-field mb-2"
           />
           <button onClick={handleSave} className="btn-primary">Save</button>
-        </div>
+        </motion.div>
       ) : (
-        <div className="space-y-4">
+        <motion.div variants={listContainer} initial="hidden" animate="show" className="space-y-4">
           {tickets.length === 0 ? (
             <div>No tickets found.</div>
           ) : (
             tickets.map((ticket) => (
               <motion.div
                 key={ticket._id}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
+                variants={listItem}
                 className="card flex flex-col md:flex-row justify-between items-start md:items-center"
               >
                 <div className="flex-grow">
@@ -188,7 +188,7 @@ function MyTickets() {
               </motion.div>
             ))
           )}
-        </div>
+        </motion.div>
       )}
     </motion.div>
   );

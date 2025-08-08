@@ -4,6 +4,8 @@ import { Menu, Transition } from "@headlessui/react";
 import { UserCircleIcon, SunIcon, MoonIcon } from "@heroicons/react/24/outline";
 import axios from "axios";
 import { BASE_URL } from "../utils/constant";
+import { motion } from "framer-motion";
+import { slideInTop } from "../utils/motion";
 
 function Navbar({ isAuthenticated, setIsAuthenticated, darkMode, toggleDarkMode }) {
   const navigate = useNavigate();
@@ -19,7 +21,12 @@ function Navbar({ isAuthenticated, setIsAuthenticated, darkMode, toggleDarkMode 
   };
 
   return (
-    <nav className="bg-white dark:bg-gray-800 shadow-md sticky top-0 z-50">
+    <motion.nav
+      variants={slideInTop}
+      initial="hidden"
+      animate="show"
+      className="bg-white/80 dark:bg-gray-800/80 backdrop-blur supports-[backdrop-filter]:bg-white/60 shadow-md sticky top-0 z-50"
+    >
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           <Link to="/" className="flex items-center space-x-2">
@@ -122,7 +129,7 @@ function Navbar({ isAuthenticated, setIsAuthenticated, darkMode, toggleDarkMode 
           </div>
         </div>
       </div>
-    </nav>
+    </motion.nav>
   );
 }
 

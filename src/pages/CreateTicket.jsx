@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { BASE_URL } from '../utils/constant';
+import { scaleIn, fadeInUp } from '../utils/motion';
 
 
 function CreateTicket() {
@@ -100,14 +101,14 @@ function CreateTicket() {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
+      variants={scaleIn}
+      initial="hidden"
+      animate="show"
       className="max-w-2xl mx-auto px-4 py-8"
     >
       <ToastContainer />
       <div className="card">
-        <h2 className="text-2xl font-bold text-center mb-6">Create New Ticket</h2>
+        <motion.h2 variants={fadeInUp} initial="hidden" animate="show" className="text-2xl font-bold text-center mb-6">Create New Ticket</motion.h2>
         {error && <div className="text-red-600 mb-4">{error}</div>}
         <form onSubmit={handleSubmit}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { format } from 'date-fns';
 import { useNavigate } from 'react-router-dom';
+import { fadeInUp, staggerContainer, scaleIn } from '../utils/motion';
 
 function Home() {
   const navigate = useNavigate();
@@ -31,9 +32,9 @@ function Home() {
         
         <div className="relative h-full flex flex-col items-center justify-center px-4">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            variants={fadeInUp}
+            initial="hidden"
+            animate="show"
             className="text-center text-white mb-12"
           >
             <h1 className="text-6xl font-bold mb-4">Your Journey Begins Here</h1>
@@ -41,9 +42,9 @@ function Home() {
           </motion.div>
           
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.2 }}
+            variants={scaleIn}
+            initial="hidden"
+            animate="show"
             className="w-full max-w-4xl"
           >
             <form onSubmit={handleSearch} className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl p-8">
@@ -93,20 +94,26 @@ function Home() {
       <div className="py-20 bg-gray-50 dark:bg-gray-900">
         <div className="container mx-auto px-4">
           <motion.h2 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            variants={fadeInUp}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
             className="text-4xl font-bold text-center mb-16"
           >
             Why Choose Us?
           </motion.h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.15 }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+          >
             {features.map((feature, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
+                variants={fadeInUp}
                 className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow"
               >
                 <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -116,7 +123,7 @@ function Home() {
                 <p className="text-gray-600 dark:text-gray-400 text-center">{feature.description}</p>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </div>
 
@@ -124,8 +131,10 @@ function Home() {
       <div className="py-20">
         <div className="container mx-auto px-4">
           <motion.h2 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            variants={fadeInUp}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
             className="text-4xl font-bold text-center mb-16"
           >
             Popular Destinations
@@ -135,9 +144,10 @@ function Home() {
             {destinations.map((destination, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: index * 0.1 }}
+                variants={scaleIn}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true }}
                 className="relative rounded-xl overflow-hidden group cursor-pointer"
               >
                 <img 

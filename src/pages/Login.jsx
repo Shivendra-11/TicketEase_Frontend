@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import axios from 'axios';
 import { BASE_URL } from '../utils/constant';
+import { scaleIn, fadeInUp } from '../utils/motion';
 
 function Login({ setIsAuthenticated }) {
   const navigate = useNavigate();
@@ -27,15 +28,10 @@ function Login({ setIsAuthenticated }) {
 
   return (
     <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center px-4 py-12 bg-gray-50 dark:bg-gray-900">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="max-w-md w-full"
-      >
+      <motion.div variants={scaleIn} initial="hidden" animate="show" className="max-w-md w-full">
         <div className="text-center mb-8">
-          <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Welcome Back</h2>
-          <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">Please sign in to your account</p>
+          <motion.h2 variants={fadeInUp} className="text-3xl font-bold text-gray-900 dark:text-white">Welcome Back</motion.h2>
+          <motion.p variants={fadeInUp} className="mt-2 text-sm text-gray-600 dark:text-gray-400">Please sign in to your account</motion.p>
         </div>
 
         <div className="card">

@@ -1,8 +1,9 @@
 import { motion } from 'framer-motion';
+import { slideInTop } from '../utils/motion';
 
 function Footer() {
   return (
-    <footer className="bg-white dark:bg-gray-800 shadow-md mt-auto">
+    <motion.footer variants={slideInTop} initial="hidden" whileInView="show" viewport={{ once: true }} className="bg-white dark:bg-gray-800 shadow-md mt-auto">
       <div className="container mx-auto px-4 py-6">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <motion.div
@@ -40,7 +41,7 @@ function Footer() {
           </div>
         </div>
       </div>
-    </footer>
+    </motion.footer>
   );
 }
 

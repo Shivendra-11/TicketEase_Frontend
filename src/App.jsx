@@ -10,6 +10,8 @@ import Signup from './pages/Signup';
 import CreateTicket from './pages/CreateTicket';
 import MyTickets from './pages/MyTickets';
 import Tickets from './pages/Tickets';
+import { AnimatePresence, motion } from 'framer-motion';
+import AnimatedBackground from './components/AnimatedBackground';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -23,6 +25,7 @@ function App() {
   return (
     <Router>
       <div className="min-h-screen flex flex-col">
+        <AnimatedBackground />
         <Navbar 
           isAuthenticated={isAuthenticated} 
           setIsAuthenticated={setIsAuthenticated}

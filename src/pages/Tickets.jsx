@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { fadeInUp, listContainer, listItem, scaleIn } from '../utils/motion';
 import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Dialog, Transition } from '@headlessui/react';
@@ -87,9 +88,9 @@ function Tickets() {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
+      variants={scaleIn}
+      initial="hidden"
+      animate="show"
       className="max-w-7xl mx-auto px-4 py-8"
     >
       {redirecting && (
@@ -202,7 +203,7 @@ function Tickets() {
                 : error}
             </div>
           )}
-          <div className="space-y-4">
+          <motion.div variants={listContainer} initial="hidden" animate="show" className="space-y-4">
             {loading ? (
               <div>Loading tickets...</div>
             ) : filteredTickets.length === 0 ? (
@@ -218,8 +219,7 @@ function Tickets() {
             ) : filteredTickets.map((ticket) => (
               <motion.div
                 key={ticket._id}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
+                variants={listItem}
                 className="card hover:shadow-lg transition-shadow"
               >
                 <div className="flex flex-col md:flex-row justify-between">
@@ -255,7 +255,7 @@ function Tickets() {
                 </div>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </div>
 

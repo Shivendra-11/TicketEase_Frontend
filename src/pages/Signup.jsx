@@ -4,6 +4,7 @@ import { useState } from "react";
 import axios from "axios";
 import { BASE_URL } from "../utils/constant"; 
 import { useNavigate } from "react-router-dom"; 
+import { scaleIn, fadeInUp } from "../utils/motion";
 
 function Signup() {
   const [name, setName] = useState(""); // Changed from setFullname
@@ -32,19 +33,10 @@ function Signup() {
 
   return (
     <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center px-4 py-12 bg-gray-50 dark:bg-gray-900">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="max-w-md w-full"
-      >
+      <motion.div variants={scaleIn} initial="hidden" animate="show" className="max-w-md w-full">
         <div className="text-center mb-8">
-          <h2 className="text-3xl font-bold text-gray-900 dark:text-white">
-            Create Account
-          </h2>
-          <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-            Join us and start booking your train tickets
-          </p>
+          <motion.h2 variants={fadeInUp} className="text-3xl font-bold text-gray-900 dark:text-white">Create Account</motion.h2>
+          <motion.p variants={fadeInUp} className="mt-2 text-sm text-gray-600 dark:text-gray-400">Join us and start booking your train tickets</motion.p>
         </div>
 
         <div className="card">
